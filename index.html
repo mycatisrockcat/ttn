@@ -18,7 +18,14 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--bg); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: var(--text); }
   .wrap { max-width: 600px; margin: 0 auto; padding: 1.5rem 1rem; }
-  .date-header { font-size: 13px; color: var(--text3); margin-bottom: 0.75rem; }
+  
+  /* 날짜 입력창 스타일 수정 */
+  .date-header-wrap { margin-bottom: 0.75rem; }
+  .date-inp-main { font-family: inherit; font-size: 14px; font-weight: 600; color: var(--text2); background: transparent; border: none; outline: none; cursor: pointer; padding: 2px 0; }
+  .date-inp-main::-webkit-calendar-picker-indicator { cursor: pointer; filter: invert(0.4); }
+  @media (prefers-color-scheme: dark) {
+    .date-inp-main::-webkit-calendar-picker-indicator { filter: invert(0.8); }
+  }
 
   .composer { background: var(--bg); border: 0.5px solid var(--border2); border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 0.5rem; }
   .composer-top { display: flex; gap: 12px; align-items: flex-start; }
@@ -125,7 +132,10 @@
 </head>
 <body>
 <div class="wrap">
-  <p class="date-header" id="date-display"></p>
+  <div class="date-header-wrap">
+    <input type="date" class="date-inp-main" id="date-display" aria-label="일기 날짜 선택">
+  </div>
+
   <div class="composer">
     <div class="composer-top">
       <div class="c-avatar-wrap" id="avatar-wrap" title="클릭해서 프로필 사진 변경">
@@ -160,6 +170,7 @@
       </div>
     </div>
   </div>
+  <p class="hint">📷 아바타 클릭 → 프로필 사진 변경 &nbsp;·&nbsp; 날짜와 시간은 직접 수정할 수 있어요</p>
 
   <input type="file" id="file-input" accept="image/*" multiple style="display:none;">
   <input type="file" id="avatar-input" accept="image/*" style="display:none;">
@@ -194,7 +205,18 @@
   function autoSize(el) { el.style.width = '4px'; el.style.width = el.scrollWidth + 'px'; }
   function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
   function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'), 2200); }
-  function today() { return new Date().toLocaleDateString('ko-KR', { year:'numeric', month:'long', day:'numeric', weekday:'short' }); }
+  
+  // 날짜 포맷 함수 수정 (YYYY-MM-DD 입력값을 노션 복사용 텍스트 포맷으로 변경)
+  function getSelectedDateText() {
+    const val = document.getElementById('date-display').value;
+    if(!val) return '';
+    const d = new Date(val);
+    return d.toLocaleDateString('ko-KR', { year:'numeric', month:'long', day:'numeric', weekday:'short' });
+  }
+  function getTodayYMD() {
+    const d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  }
   function nowTime() { const d = new Date(); return d.toTimeString().slice(0,5); }
   function fmtTime(s) { const [h,m]=s.split(':').map(Number); return `${h<12?'오전':'오후'} ${h===0?12:h>12?h-12:h}:${String(m).padStart(2,'0')}`; }
 
@@ -210,7 +232,8 @@
     if (!name) el.innerHTML = '<i class="ti ti-user" style="font-size:20px;color:#fff;"></i>';
   }
 
-  document.getElementById('date-display').textContent = today();
+  // 초기값으로 오늘 날짜 세팅
+  document.getElementById('date-display').value = getTodayYMD();
   document.getElementById('time-inp').value = nowTime();
 
   ['prof-name','prof-id'].forEach(id => {
@@ -322,7 +345,7 @@
   }
 
   document.getElementById('btn-copy').addEventListener('click',()=>{
-    const lines=[today(),''];
+    const lines=[getSelectedDateText(), '']; // 복사 시 선택된 날짜가 출력되도록 수정
     [...entries].reverse().forEach(e=>{
       const who=[e.name,e.uid].filter(Boolean).join(' ');
       lines.push('['+fmtTime(e.timeStr||'00:00')+']'+(who?' '+who:''));
@@ -332,7 +355,7 @@
     });
     navigator.clipboard.writeText(lines.join('\n')).then(()=>showToast('복사됐어요! 노션에 붙여넣기 하세요.'));
   });
-  document.getElementById('btn-clear').addEventListener('click',()=>{if(confirm('오늘 기록을 모두 지울까요?')){entries=[];save();render();}});
+  document.getElementById('btn-clear').addEventListener('click',()=>{if(confirm('기록을 모두 지울까요?')){entries=[];save();render();}});
 
   load();render();updateCharRing();
 </script>
