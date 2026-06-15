@@ -2,13 +2,14 @@
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 .wrap { max-width: 600px; margin: 0 auto; padding: 1.5rem 1rem; font-family: var(--font-sans); }
+.date-header { font-size: 13px; color: var(--color-text-tertiary); margin-bottom: 0.75rem; }
 
-.composer { background: var(--color-background-primary); border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: 1.25rem; }
+.composer { background: var(--color-background-primary); border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: 0.5rem; }
 .composer-top { display: flex; gap: 12px; align-items: flex-start; }
 
 .c-avatar-wrap { position: relative; flex-shrink: 0; cursor: pointer; }
 .c-avatar { width: 42px; height: 42px; border-radius: 50%; background: #1d9bf0; display: flex; align-items: center; justify-content: center; overflow: hidden; font-size: 18px; font-weight: 600; color: #fff; transition: filter 0.15s; }
-.c-avatar-wrap:hover .c-avatar { filter: brightness(0.75); }
+.c-avatar-wrap:hover .c-avatar { filter: brightness(0.72); }
 .c-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .c-avatar-overlay { position: absolute; inset: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.15s; }
 .c-avatar-wrap:hover .c-avatar-overlay { opacity: 1; }
@@ -16,12 +17,13 @@
 
 .c-right { flex: 1; min-width: 0; }
 .name-row { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
-.name-row input { font-family: inherit; background: transparent; border: none; outline: none; color: var(--color-text-primary); }
-.inp-name { font-size: 15px; font-weight: 600; min-width: 60px; width: auto; max-width: 180px; }
+.name-row input { font-family: inherit; background: transparent; border: none; outline: none; }
+.inp-name { font-size: 15px; font-weight: 600; color: var(--color-text-primary); min-width: 60px; width: auto; max-width: 180px; }
 .inp-name::placeholder { color: var(--color-text-tertiary); font-weight: 400; }
-.inp-id { font-size: 14px; color: var(--color-text-secondary); min-width: 50px; width: auto; max-width: 150px; }
+.inp-id { font-size: 14px; color: #8b98a5; min-width: 50px; width: auto; max-width: 150px; }
 .inp-id::placeholder { color: var(--color-text-tertiary); }
 .name-divider { color: var(--color-border-secondary); font-size: 13px; }
+
 #input-area { width: 100%; font-size: 15px; font-family: inherit; color: var(--color-text-primary); background: transparent; border: none; outline: none; resize: none; line-height: 1.6; min-height: 72px; }
 #input-area::placeholder { color: var(--color-text-tertiary); }
 
@@ -33,7 +35,7 @@
 .photo-preview.n1 .pslot { height: 260px; }
 .photo-preview.n2 .pslot { height: 200px; }
 .photo-preview.n3 .pslot { height: 140px; }
-.photo-preview.n3 .pslot:first-child { grid-column: 1/-1; height: 180px; }
+.photo-preview.n3 .pslot:first-child { grid-column:1/-1; height: 180px; }
 .photo-preview.n4 .pslot { height: 140px; }
 .pslot { position: relative; overflow: hidden; background: var(--color-background-secondary); }
 .pslot img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -41,19 +43,29 @@
 .pslot .del-photo i { font-size: 14px; }
 
 .composer-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; padding-top: 12px; border-top: 0.5px solid var(--color-border-tertiary); }
-.bottom-left { display: flex; align-items: center; gap: 2px; }
-.btn-photo-add { background: none; border: none; cursor: pointer; color: #1d9bf0; padding: 6px; border-radius: 50%; font-size: 20px; line-height: 1; display: flex; align-items: center; }
-.btn-photo-add:hover { background: rgba(29,155,240,0.12); }
-.btn-photo-add:disabled { opacity: 0.35; cursor: not-allowed; }
-.heart-btn { background: none; border: none; cursor: pointer; font-size: 20px; padding: 6px; border-radius: 50%; line-height: 1; }
+.bottom-left { display: flex; align-items: center; gap: 4px; }
+.bottom-right { display: flex; align-items: center; gap: 8px; }
+
+.icon-btn { background: none; border: none; cursor: pointer; padding: 6px; border-radius: 50%; font-size: 20px; line-height: 1; display: flex; align-items: center; color: #1d9bf0; }
+.icon-btn:hover { background: rgba(29,155,240,0.12); }
+.icon-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.icon-btn:disabled:hover { background: none; }
+
+.heart-btn { background: none; border: none; cursor: pointer; font-size: 20px; padding: 6px; border-radius: 50%; line-height: 1; display: flex; align-items: center; }
 .heart-btn:hover { background: rgba(249,24,128,0.1); }
-.bottom-right { display: flex; align-items: center; gap: 10px; }
-.char-ring { position: relative; width: 24px; height: 24px; }
+
+.char-ring { position: relative; width: 24px; height: 24px; flex-shrink: 0; }
 .char-ring svg { transform: rotate(-90deg); }
 .char-warn { font-size: 11px; color: #f4212e; font-weight: 600; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+
+.time-inp { font-family: inherit; font-size: 13px; color: #8b98a5; background: var(--color-background-secondary); border: 0.5px solid var(--color-border-secondary); border-radius: 6px; padding: 3px 7px; outline: none; width: 80px; cursor: pointer; }
+.time-inp:focus { border-color: #1d9bf0; }
+
 .btn-post { background: #1d9bf0; color: #fff; border: none; border-radius: 999px; padding: 8px 20px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; }
 .btn-post:disabled { opacity: 0.45; cursor: not-allowed; }
 .btn-post:not(:disabled):hover { background: #1a8cd8; }
+
+.hint { font-size: 11px; color: var(--color-text-tertiary); margin-bottom: 1.25rem; padding-left: 2px; }
 
 .toolbar { display: flex; gap: 8px; justify-content: flex-end; margin-bottom: 1rem; }
 .btn-tool { display: flex; align-items: center; gap: 6px; background: transparent; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 6px 14px; font-size: 13px; color: var(--color-text-secondary); cursor: pointer; font-family: inherit; }
@@ -72,8 +84,8 @@
 .e-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px; }
 .e-names { display: flex; align-items: baseline; gap: 5px; flex-wrap: wrap; }
 .e-name { font-size: 14px; font-weight: 600; color: var(--color-text-primary); }
-.e-uid { font-size: 13px; color: var(--color-text-secondary); }
-.e-time { font-size: 12px; color: var(--color-text-tertiary); }
+.e-uid { font-size: 13px; color: #8b98a5; }
+.e-time { font-size: 12px; color: #8b98a5; }
 .e-delete { background: none; border: none; cursor: pointer; color: var(--color-text-tertiary); padding: 2px 5px; border-radius: 4px; }
 .e-delete:hover { color: #c0392b; background: var(--color-background-danger); }
 .e-text { font-size: 15px; color: var(--color-text-primary); line-height: 1.6; white-space: pre-wrap; word-break: break-word; }
@@ -85,27 +97,22 @@
 .e-photos.n1 .eslot { height: 200px; }
 .e-photos.n2 .eslot { height: 150px; }
 .e-photos.n3 .eslot { height: 120px; }
-.e-photos.n3 .eslot:first-child { grid-column: 1/-1; height: 150px; }
+.e-photos.n3 .eslot:first-child { grid-column:1/-1; height: 150px; }
 .e-photos.n4 .eslot { height: 120px; }
 .eslot { overflow: hidden; }
 .eslot img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-.hint { font-size: 11px; color: var(--color-text-tertiary); text-align: center; margin-top: 4px; }
 .empty { text-align: center; padding: 2.5rem 1rem; color: var(--color-text-tertiary); font-size: 14px; }
-.date-header { font-size: 13px; color: var(--color-text-tertiary); margin-bottom: 0.75rem; }
 .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(60px); background: var(--color-text-primary); color: var(--color-background-primary); padding: 10px 20px; border-radius: 999px; font-size: 13px; opacity: 0; transition: all 0.25s ease; pointer-events: none; z-index: 999; white-space: nowrap; }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 </style>
 
 <div class="wrap">
   <p class="date-header" id="date-display"></p>
-
   <div class="composer">
     <div class="composer-top">
       <div class="c-avatar-wrap" id="avatar-wrap" title="클릭해서 프로필 사진 변경">
-        <div class="c-avatar" id="comp-avatar">
-          <i class="ti ti-user" style="font-size:20px;color:#fff;"></i>
-        </div>
+        <div class="c-avatar" id="comp-avatar"><i class="ti ti-user" style="font-size:20px;color:#fff;"></i></div>
         <div class="c-avatar-overlay"><i class="ti ti-camera"></i></div>
       </div>
       <div class="c-right">
@@ -120,12 +127,8 @@
     </div>
     <div class="composer-bottom">
       <div class="bottom-left">
-        <button class="btn-photo-add" id="btn-photo" title="사진 추가" aria-label="사진 추가">
-          <i class="ti ti-photo"></i>
-        </button>
-        <button class="heart-btn" id="heart-btn" aria-label="좋아요">🩵</button>
-      </div>
-      <div class="bottom-right">
+        <button class="icon-btn" id="btn-photo" title="사진 추가 (최대 4장)" aria-label="사진 추가"><i class="ti ti-photo"></i></button>
+        <button class="heart-btn" id="heart-btn" aria-label="좋아요">❤️</button>
         <div class="char-ring" id="char-ring" style="display:none;">
           <svg width="24" height="24" viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="9" fill="none" stroke="var(--color-border-secondary)" stroke-width="2.5"/>
@@ -133,11 +136,14 @@
           </svg>
           <span class="char-warn" id="char-warn" style="display:none;"></span>
         </div>
+      </div>
+      <div class="bottom-right">
+        <input class="time-inp" id="time-inp" type="time" aria-label="작성 시간">
         <button class="btn-post" id="btn-post" disabled>올리기</button>
       </div>
     </div>
   </div>
-  <p class="hint">📷 프로필 사진은 아바타를 클릭해서 변경할 수 있어요</p>
+  <p class="hint">📷 아바타 클릭 → 프로필 사진 변경 &nbsp;·&nbsp; 시간은 직접 수정할 수 있어요</p>
 
   <input type="file" id="file-input" accept="image/*" multiple style="display:none;">
   <input type="file" id="avatar-input" accept="image/*" style="display:none;">
@@ -146,251 +152,159 @@
     <button class="btn-tool" id="btn-copy"><i class="ti ti-copy"></i> 전체 복사</button>
     <button class="btn-tool danger" id="btn-clear"><i class="ti ti-trash"></i> 전체 지우기</button>
   </div>
-
   <div class="empty" id="empty-msg">아직 작성된 내용이 없어요.</div>
   <div class="entries" id="entries-list"></div>
 </div>
 <div class="toast" id="toast"></div>
 
 <script>
-const KEY = 'diary4_' + location.pathname + location.search;
-const PROF_KEY = 'diary4_profile';
-let entries = [];
-let pendingPhotos = [];
-let liked = false;
-let profilePhoto = null; // base64
+const KEY = 'diary6_' + location.pathname + location.search;
+const PROF_KEY = 'diary6_profile';
+let entries = [], pendingPhotos = [], liked = false, profilePhoto = null;
 
 function load() {
   try { entries = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch(e) { entries = []; }
   try {
     const p = JSON.parse(localStorage.getItem(PROF_KEY) || '{}');
     if (p.name) { document.getElementById('prof-name').value = p.name; autoSize(document.getElementById('prof-name')); }
-    if (p.id) { document.getElementById('prof-id').value = p.id; autoSize(document.getElementById('prof-id')); }
-    if (p.photo) { profilePhoto = p.photo; applyAvatar(); }
-    else { updateAvatarInitial(); }
+    if (p.id)   { document.getElementById('prof-id').value   = p.id;   autoSize(document.getElementById('prof-id')); }
+    if (p.photo) { profilePhoto = p.photo; applyAvatar(); } else { updateAvatarInitial(); }
   } catch(e) { updateAvatarInitial(); }
 }
-
 function save() { localStorage.setItem(KEY, JSON.stringify(entries)); }
-function saveProfile() {
-  localStorage.setItem(PROF_KEY, JSON.stringify({
-    name: document.getElementById('prof-name').value,
-    id: document.getElementById('prof-id').value,
-    photo: profilePhoto
-  }));
-}
-
+function saveProfile() { localStorage.setItem(PROF_KEY, JSON.stringify({ name: document.getElementById('prof-name').value, id: document.getElementById('prof-id').value, photo: profilePhoto })); }
 function autoSize(el) { el.style.width = '4px'; el.style.width = el.scrollWidth + 'px'; }
+function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'), 2200); }
+function today() { return new Date().toLocaleDateString('ko-KR', { year:'numeric', month:'long', day:'numeric', weekday:'short' }); }
+function nowTime() { const d = new Date(); return d.toTimeString().slice(0,5); }
+function fmtTime(s) { const [h,m]=s.split(':').map(Number); return `${h<12?'오전':'오후'} ${h===0?12:h>12?h-12:h}:${String(m).padStart(2,'0')}`; }
 
 function applyAvatar() {
   const el = document.getElementById('comp-avatar');
-  if (profilePhoto) {
-    el.innerHTML = `<img src="${profilePhoto}" alt="프로필">`;
-  } else {
-    updateAvatarInitial();
-  }
+  if (profilePhoto) { el.innerHTML = `<img src="${profilePhoto}" alt="프로필">`; }
+  else { updateAvatarInitial(); }
 }
-
 function updateAvatarInitial() {
+  if (profilePhoto) { applyAvatar(); return; }
   const name = document.getElementById('prof-name').value.trim();
   const el = document.getElementById('comp-avatar');
-  if (profilePhoto) { applyAvatar(); return; }
-  if (name) { el.textContent = name.charAt(0).toUpperCase(); }
-  else { el.innerHTML = '<i class="ti ti-user" style="font-size:20px;color:#fff;"></i>'; }
-}
-
-function getName() { return document.getElementById('prof-name').value.trim(); }
-function getId() {
-  let v = document.getElementById('prof-id').value.trim();
-  if (!v) return '';
-  return v.startsWith('@') ? v : '@' + v;
-}
-function fmt(ts) { return new Date(ts).toLocaleTimeString('ko-KR', { hour:'2-digit', minute:'2-digit' }); }
-function today() { return new Date().toLocaleDateString('ko-KR', { year:'numeric', month:'long', day:'numeric', weekday:'short' }); }
-function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2200);
+  el.textContent = name ? name.charAt(0).toUpperCase() : '';
+  if (!name) el.innerHTML = '<i class="ti ti-user" style="font-size:20px;color:#fff;"></i>';
 }
 
 document.getElementById('date-display').textContent = today();
+document.getElementById('time-inp').value = nowTime();
 
 ['prof-name','prof-id'].forEach(id => {
   const el = document.getElementById(id);
-  el.addEventListener('input', () => {
-    autoSize(el); saveProfile();
-    if (id === 'prof-name') updateAvatarInitial();
-  });
+  el.addEventListener('input', () => { autoSize(el); saveProfile(); if(id==='prof-name') updateAvatarInitial(); });
 });
 
-// 아바타 클릭 → 파일 선택
-document.getElementById('avatar-wrap').addEventListener('click', () => {
-  document.getElementById('avatar-input').click();
-});
+document.getElementById('avatar-wrap').addEventListener('click', () => document.getElementById('avatar-input').click());
 document.getElementById('avatar-input').addEventListener('change', e => {
-  const file = e.target.files[0];
-  if (!file) return;
+  const file = e.target.files[0]; if (!file) return;
   const r = new FileReader();
-  r.onload = ev => {
-    profilePhoto = ev.target.result;
-    applyAvatar();
-    saveProfile();
-    showToast('프로필 사진이 변경됐어요!');
-  };
+  r.onload = ev => { profilePhoto = ev.target.result; applyAvatar(); saveProfile(); showToast('프로필 사진이 변경됐어요!'); };
   r.readAsDataURL(file);
 });
 
 function updateCharRing() {
   const len = document.getElementById('input-area').value.length;
-  const ring = document.getElementById('char-ring');
-  const circle = document.getElementById('ring-circle');
-  const warn = document.getElementById('char-warn');
-  if (len === 0) { ring.style.display = 'none'; return; }
-  ring.style.display = '';
+  const ring = document.getElementById('char-ring'), circle = document.getElementById('ring-circle'), warn = document.getElementById('char-warn');
+  if (len===0) { ring.style.display='none'; return; }
+  ring.style.display='';
   circle.setAttribute('stroke-dashoffset', (56.55*(1-len/280)).toFixed(2));
-  circle.setAttribute('stroke', len > 260 ? '#f4212e' : len > 220 ? '#ffd400' : '#1d9bf0');
-  warn.style.display = len > 260 ? '' : 'none';
-  if (len > 260) warn.textContent = 280 - len;
+  circle.setAttribute('stroke', len>260?'#f4212e':len>220?'#ffd400':'#1d9bf0');
+  warn.style.display = len>260?'':'none';
+  if (len>260) warn.textContent = 280-len;
 }
-
-function canPost() {
-  return document.getElementById('input-area').value.trim() !== '' || pendingPhotos.length > 0;
-}
+function canPost() { return document.getElementById('input-area').value.trim()!==''||pendingPhotos.length>0; }
 
 const textarea = document.getElementById('input-area');
 textarea.addEventListener('input', () => {
-  textarea.style.height = 'auto';
-  textarea.style.height = textarea.scrollHeight + 'px';
-  document.getElementById('btn-post').disabled = !canPost();
-  updateCharRing();
+  textarea.style.height='auto'; textarea.style.height=textarea.scrollHeight+'px';
+  document.getElementById('btn-post').disabled=!canPost(); updateCharRing();
 });
-textarea.addEventListener('keydown', e => {
-  if ((e.metaKey||e.ctrlKey) && e.key==='Enter') { e.preventDefault(); doPost(); }
-});
+textarea.addEventListener('keydown', e => { if((e.metaKey||e.ctrlKey)&&e.key==='Enter'){e.preventDefault();doPost();} });
 
 function updatePhotoPreview() {
   const prev = document.getElementById('photo-preview');
-  if (pendingPhotos.length === 0) { prev.style.display = 'none'; prev.innerHTML = ''; return; }
-  prev.style.display = '';
-  renderGrid(pendingPhotos, prev, true);
+  if (!pendingPhotos.length){prev.style.display='none';prev.innerHTML='';return;}
+  prev.style.display=''; renderGrid(pendingPhotos,prev,true);
 }
-function updatePhotoBtnState() { document.getElementById('btn-photo').disabled = pendingPhotos.length >= 4; }
-
+function updatePhotoBtnState() { document.getElementById('btn-photo').disabled=pendingPhotos.length>=4; }
 function renderGrid(photos, container, isPreview) {
-  container.className = (isPreview ? 'photo-preview' : 'e-photos') + ' n' + photos.length;
-  container.innerHTML = '';
-  photos.forEach((src, i) => {
-    const slot = document.createElement('div');
-    slot.className = isPreview ? 'pslot' : 'eslot';
-    const img = document.createElement('img'); img.src = src; slot.appendChild(img);
-    if (isPreview) {
-      const del = document.createElement('button');
-      del.className = 'del-photo';
-      del.innerHTML = '<i class="ti ti-x"></i>';
-      del.addEventListener('click', () => {
-        pendingPhotos.splice(i,1); updatePhotoPreview(); updatePhotoBtnState();
-        document.getElementById('btn-post').disabled = !canPost();
-      });
+  container.className=(isPreview?'photo-preview':'e-photos')+' n'+photos.length;
+  container.innerHTML='';
+  photos.forEach((src,i)=>{
+    const slot=document.createElement('div'); slot.className=isPreview?'pslot':'eslot';
+    const img=document.createElement('img'); img.src=src; slot.appendChild(img);
+    if(isPreview){
+      const del=document.createElement('button'); del.className='del-photo'; del.innerHTML='<i class="ti ti-x"></i>';
+      del.addEventListener('click',()=>{pendingPhotos.splice(i,1);updatePhotoPreview();updatePhotoBtnState();document.getElementById('btn-post').disabled=!canPost();});
       slot.appendChild(del);
     }
     container.appendChild(slot);
   });
 }
-
-document.getElementById('btn-photo').addEventListener('click', () => {
-  const fi = document.getElementById('file-input'); fi.value=''; fi.click();
-});
-document.getElementById('file-input').addEventListener('change', e => {
-  const files = Array.from(e.target.files).slice(0, 4 - pendingPhotos.length);
-  let done = 0;
-  files.forEach(f => {
-    const r = new FileReader();
-    r.onload = ev => {
-      pendingPhotos.push(ev.target.result); done++;
-      if (done===files.length) { updatePhotoPreview(); updatePhotoBtnState(); document.getElementById('btn-post').disabled = !canPost(); }
-    };
-    r.readAsDataURL(f);
-  });
+document.getElementById('btn-photo').addEventListener('click',()=>{const fi=document.getElementById('file-input');fi.value='';fi.click();});
+document.getElementById('file-input').addEventListener('change',e=>{
+  const files=Array.from(e.target.files).slice(0,4-pendingPhotos.length); let done=0;
+  files.forEach(f=>{const r=new FileReader();r.onload=ev=>{pendingPhotos.push(ev.target.result);done++;if(done===files.length){updatePhotoPreview();updatePhotoBtnState();document.getElementById('btn-post').disabled=!canPost();}};r.readAsDataURL(f);});
 });
 
 document.getElementById('heart-btn').addEventListener('click', function() {
-  liked = !liked; this.textContent = liked ? '💙' : '🩵';
+  liked=!liked; this.textContent=liked?'💔':'❤️';
 });
 
 document.getElementById('btn-post').addEventListener('click', doPost);
-
 function doPost() {
-  if (!canPost()) return;
-  entries.unshift({
-    text: textarea.value.trim(),
-    photos: [...pendingPhotos],
-    name: getName(),
-    uid: getId(),
-    profilePhoto: profilePhoto,
-    ts: Date.now()
-  });
-  save(); render();
-  textarea.value = ''; textarea.style.height = '';
-  pendingPhotos = []; updatePhotoPreview(); updatePhotoBtnState();
-  document.getElementById('btn-post').disabled = true;
+  if(!canPost()) return;
+  const timeVal=document.getElementById('time-inp').value||nowTime();
+  entries.unshift({text:textarea.value.trim(),photos:[...pendingPhotos],name:document.getElementById('prof-name').value.trim(),uid:(()=>{let v=document.getElementById('prof-id').value.trim();if(!v)return'';return v.startsWith('@')?v:'@'+v;})(),profilePhoto,timeStr:timeVal,ts:Date.now()});
+  save();render();
+  textarea.value='';textarea.style.height='';
+  pendingPhotos=[];updatePhotoPreview();updatePhotoBtnState();
+  document.getElementById('btn-post').disabled=true;
+  document.getElementById('time-inp').value=nowTime();
   updateCharRing();
 }
 
 function render() {
-  const list = document.getElementById('entries-list');
-  const empty = document.getElementById('empty-msg');
-  const toolbar = document.getElementById('toolbar');
-  list.innerHTML = '';
-  if (entries.length === 0) { empty.style.display = ''; toolbar.style.display = 'none'; return; }
-  empty.style.display = 'none'; toolbar.style.display = 'flex';
-  entries.forEach((e, i) => {
-    const div = document.createElement('div'); div.className = 'entry';
-    const avatarInner = e.profilePhoto
-      ? `<img src="${e.profilePhoto}" alt="프로필">`
-      : (e.name ? e.name.charAt(0).toUpperCase() : '<i class="ti ti-user" style="font-size:18px;color:#fff;"></i>');
-    div.innerHTML = `
+  const list=document.getElementById('entries-list'),empty=document.getElementById('empty-msg'),toolbar=document.getElementById('toolbar');
+  list.innerHTML='';
+  if(!entries.length){empty.style.display='';toolbar.style.display='none';return;}
+  empty.style.display='none';toolbar.style.display='flex';
+  entries.forEach((e,i)=>{
+    const div=document.createElement('div');div.className='entry';
+    const avatarInner=e.profilePhoto?`<img src="${e.profilePhoto}" alt="프로필">`:(e.name?e.name.charAt(0).toUpperCase():'<i class="ti ti-user" style="font-size:18px;color:#fff;"></i>');
+    div.innerHTML=`
       <div class="e-avatar">${avatarInner}</div>
       <div class="e-body">
         <div class="e-header">
           <div class="e-names">
-            ${e.name ? `<span class="e-name">${esc(e.name)}</span>` : ''}
-            ${e.uid ? `<span class="e-uid">${esc(e.uid)}</span>` : ''}
-            <span class="e-time">· ${fmt(e.ts)}</span>
+            ${e.name?`<span class="e-name">${esc(e.name)}</span>`:''}
+            ${e.uid?`<span class="e-uid">${esc(e.uid)}</span>`:''}
+            <span class="e-time">· ${e.timeStr?fmtTime(e.timeStr):''}</span>
           </div>
           <button class="e-delete" data-i="${i}" aria-label="삭제"><i class="ti ti-x" style="font-size:13px;"></i></button>
         </div>
-        ${e.text ? `<p class="e-text">${esc(e.text)}</p>` : ''}
-        ${e.photos&&e.photos.length ? `<div class="photos-ph"></div>` : ''}
+        ${e.text?`<p class="e-text">${esc(e.text)}</p>`:''}
+        ${e.photos&&e.photos.length?`<div class="photos-ph"></div>`:''}
       </div>`;
     list.appendChild(div);
-    if (e.photos && e.photos.length) {
-      const ph = div.querySelector('.photos-ph');
-      const grid = document.createElement('div');
-      renderGrid(e.photos, grid, false);
-      ph.replaceWith(grid);
-    }
+    if(e.photos&&e.photos.length){const ph=div.querySelector('.photos-ph');const grid=document.createElement('div');renderGrid(e.photos,grid,false);ph.replaceWith(grid);}
   });
-  list.querySelectorAll('.e-delete').forEach(btn => {
-    btn.addEventListener('click', () => { entries.splice(parseInt(btn.dataset.i),1); save(); render(); });
-  });
+  list.querySelectorAll('.e-delete').forEach(btn=>{btn.addEventListener('click',()=>{entries.splice(parseInt(btn.dataset.i),1);save();render();});});
 }
 
-document.getElementById('btn-copy').addEventListener('click', () => {
-  const lines = [today(),''];
-  [...entries].reverse().forEach(e => {
-    const who = [e.name, e.uid].filter(Boolean).join(' ');
-    lines.push('['+fmt(e.ts)+']'+(who?' '+who:''));
-    if (e.text) lines.push(e.text);
-    if (e.photos&&e.photos.length) lines.push('📷 사진 '+e.photos.length+'장');
-    lines.push('');
-  });
+document.getElementById('btn-copy').addEventListener('click',()=>{
+  const lines=[today(),''];
+  [...entries].reverse().forEach(e=>{const who=[e.name,e.uid].filter(Boolean).join(' ');lines.push('['+fmtTime(e.timeStr||'00:00')+']'+(who?' '+who:''));if(e.text)lines.push(e.text);if(e.photos&&e.photos.length)lines.push('📷 사진 '+e.photos.length+'장');lines.push('');});
   navigator.clipboard.writeText(lines.join('\n')).then(()=>showToast('복사됐어요! 노션에 붙여넣기 하세요.'));
 });
+document.getElementById('btn-clear').addEventListener('click',()=>{if(confirm('오늘 기록을 모두 지울까요?')){entries=[];save();render();}});
 
-document.getElementById('btn-clear').addEventListener('click', () => {
-  if (confirm('오늘 기록을 모두 지울까요?')) { entries=[]; save(); render(); }
-});
-
-load(); render(); updateCharRing();
+load();render();updateCharRing();
 </script>
