@@ -27,12 +27,7 @@
   "expenses": [],
   "checklist": {
     "packing": [],
-    "booking": [
-      {
-        "text": "",
-        "done": false
-      }
-    ],
+    "booking": [],
     "before": []
   },
   "records": {
