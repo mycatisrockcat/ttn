@@ -11,7 +11,12 @@
     "cover": "",
     "memo": ""
   },
-  "schedule": [],
+  "schedule": [
+    {
+      "date": "",
+      "items": []
+    }
+  ],
   "expenses": [
     {
       "category": "교통",
