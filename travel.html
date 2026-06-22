@@ -154,7 +154,7 @@
   .record-date-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.25rem;}
   .record-date-chip{flex-shrink:0;padding:6px 14px;border-radius:999px;border:1px solid var(--border2);background:var(--bg);color:var(--text2);cursor:pointer;font-size:13px;font-family:inherit;}
   .record-date-chip.active{background:var(--blue);color:#fff;border-color:var(--blue);}
-  .record-layout{display:grid;grid-template-columns:1fr 2fr;gap:18px;}
+  .record-layout{display:grid;grid-template-columns:1fr 9fr;gap:18px;}
   .record-col{display:flex;flex-direction:column;gap:10px;}
   .record-col-title{font-size:13px;font-weight:700;color:var(--text2);}
   .record-timeline-col{position:relative;padding-left:4px;}
@@ -170,6 +170,9 @@
   .record-composer textarea{font-family:inherit;font-size:14px;padding:10px 12px;border:0.5px solid var(--border2);border-radius:10px;background:var(--bg2);color:var(--text);outline:none;resize:vertical;line-height:1.6;}
   .record-composer textarea:focus{border-color:var(--blue);}
   .record-composer-actions{display:flex;justify-content:space-between;align-items:center;}
+  .record-composer-left{display:flex;align-items:center;gap:8px;}
+  .record-time-inp{font-family:inherit;font-size:13px;color:var(--text2);background:var(--bg2);border:0.5px solid var(--border2);border-radius:8px;padding:5px 8px;outline:none;width:90px;}
+  .record-time-inp:focus{border-color:var(--blue);}
   #record-pending-photos{grid-template-columns:repeat(4,1fr);}
   #record-pending-photos .gallery-card{position:relative;}
 
@@ -183,6 +186,8 @@
   .record-post-body{flex:1;display:flex;flex-direction:column;gap:6px;}
   .record-post-text{font-size:14px;color:var(--text);line-height:1.6;white-space:pre-wrap;word-break:break-word;}
   .record-post-meta{display:flex;justify-content:space-between;align-items:center;}
+  .record-post-time-inp{font-family:inherit;font-size:11px;color:var(--text3);background:transparent;border:none;outline:none;cursor:pointer;padding:2px 0;}
+  .record-post-time-inp:focus{color:var(--blue);}
   .record-post-time{font-size:11px;color:var(--text3);}
   .record-post-del{background:none;border:none;color:var(--text3);cursor:pointer;font-size:13px;padding:3px;}
   .record-post-del:hover{color:#c0392b;}
@@ -340,14 +345,17 @@
             <div id="record-timeline"></div>
           </div>
           <div class="record-col record-feed-col">
-            <h4 class="record-col-title">기록</h4>
+            <h4 class="record-col-title">일기</h4>
 
             <div class="record-composer">
               <div class="gallery-grid" id="record-pending-photos" style="display:none;"></div>
               <input type="file" id="record-file-input" accept="image/*" multiple style="display:none;">
-              <textarea id="record-diary-input" rows="3" placeholder="오늘의 기록을 남겨보세요..."></textarea>
+              <textarea id="record-diary-input" rows="3" placeholder="오늘의 기록 남기기🩶"></textarea>
               <div class="record-composer-actions">
-                <button class="icon-del-btn" id="record-add-photo-btn" title="사진 추가" style="color:var(--blue);"><i class="ti ti-photo" style="font-size:20px;"></i></button>
+                <div class="record-composer-left">
+                  <button class="icon-del-btn" id="record-add-photo-btn" title="사진 추가" style="color:var(--blue);"><i class="ti ti-photo" style="font-size:20px;"></i></button>
+                  <input type="time" id="record-time-input" class="record-time-inp">
+                </div>
                 <button class="save-btn" id="record-diary-save-btn">올리기</button>
               </div>
             </div>

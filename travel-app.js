@@ -174,7 +174,7 @@ async function openTrip(id){
     if (!r.posts) {
       const posts = [];
       if ((r.photos && r.photos.length) || r.diary) {
-        posts.push({ photos: r.photos||[], text: r.diary||'', ts: Date.now() });
+        posts.push({ photos: r.photos||[], text: r.diary||'', timeStr: nowTimeStr(), ts: Date.now() });
       }
       currentTrip.records[date] = { posts };
     }
@@ -487,6 +487,8 @@ function renderRecordDateBar(){
   renderRecordContent();
 }
 
+function nowTimeStr(){ const d = new Date(); return d.toTimeString().slice(0,5); }
+
 function renderRecordContent(){
   if (!activeRecordDate) return;
   if (!currentTrip.records[activeRecordDate]) currentTrip.records[activeRecordDate] = { posts: [] };
@@ -506,6 +508,7 @@ function renderRecordContent(){
   }
 
   document.getElementById('record-diary-input').value = '';
+  document.getElementById('record-time-input').value = nowTimeStr();
   renderPendingPhotos();
   renderRecordPosts();
 }
@@ -551,14 +554,19 @@ document.getElementById('record-diary-save-btn').addEventListener('click', async
   if (!activeRecordDate) return;
   const text = document.getElementById('record-diary-input').value.trim();
   if (!text && !pendingRecordPhotos.length) return;
+  const timeStr = document.getElementById('record-time-input').value || nowTimeStr();
 
-  currentTrip.records[activeRecordDate].posts.unshift({
+  currentTrip.records[activeRecordDate].posts.push({
     text,
     photos: [...pendingRecordPhotos],
+    timeStr,
     ts: Date.now()
   });
+  // 시간 순서대로 정렬 (오래된 순)
+  currentTrip.records[activeRecordDate].posts.sort((a,b) => (a.timeStr||'').localeCompare(b.timeStr||''));
 
   document.getElementById('record-diary-input').value = '';
+  document.getElementById('record-time-input').value = nowTimeStr();
   pendingRecordPhotos = [];
   renderPendingPhotos();
   renderRecordPosts();
@@ -566,7 +574,11 @@ document.getElementById('record-diary-save-btn').addEventListener('click', async
   showToast('기록이 저장됐어요!');
 });
 
-function fmtPostTime(ts){
+function fmtPostTime(timeStr, ts){
+  if (timeStr) {
+    const [h,m] = timeStr.split(':').map(Number);
+    return `${h<12?'오전':'오후'} ${h===0?12:h>12?h-12:h}:${String(m).padStart(2,'0')}`;
+  }
   const d = new Date(ts);
   const h = d.getHours(), m = d.getMinutes();
   return `${h<12?'오전':'오후'} ${h===0?12:h>12?h-12:h}:${String(m).padStart(2,'0')}`;
@@ -599,7 +611,7 @@ function renderRecordPosts(){
       <div class="record-post-body">
         ${post.text ? `<div class="record-post-text">${esc(post.text)}</div>` : ''}
         <div class="record-post-meta">
-          <span class="record-post-time">${fmtPostTime(post.ts)}</span>
+          <input type="time" class="record-post-time-inp" value="${esc(post.timeStr||'')}" data-i="${i}">
           <button class="record-post-del" data-i="${i}"><i class="ti ti-trash" style="font-size:13px;"></i></button>
         </div>
       </div>`;
@@ -609,6 +621,13 @@ function renderRecordPosts(){
   listWrap.querySelectorAll('.record-post-photos img').forEach(img => img.addEventListener('click', () => {
     document.getElementById('lb-img').src = img.dataset.src;
     document.getElementById('lightbox').classList.add('show');
+  }));
+  listWrap.querySelectorAll('.record-post-time-inp').forEach(inp => inp.addEventListener('change', async e => {
+    const i = +e.target.dataset.i;
+    posts[i].timeStr = e.target.value;
+    posts.sort((a,b) => (a.timeStr||'').localeCompare(b.timeStr||''));
+    renderRecordPosts();
+    await saveCurrentTrip();
   }));
   listWrap.querySelectorAll('.record-post-del').forEach(btn => btn.addEventListener('click', async e => {
     if (!confirm('이 기록을 삭제할까요?')) return;
