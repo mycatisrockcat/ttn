@@ -1,0 +1,26 @@
+{
+  "id": "mqp5juune8hbp",
+  "overview": {
+    "name": "dd",
+    "destination": "",
+    "start": "",
+    "end": "",
+    "companions": "",
+    "budget": "",
+    "status": "예정",
+    "cover": "",
+    "memo": ""
+  },
+  "schedule": [],
+  "expenses": [],
+  "checklist": {
+    "packing": [],
+    "booking": [],
+    "before": []
+  },
+  "records": {},
+  "exchangeRate": {
+    "currency": "엔",
+    "rate": ""
+  }
+}
