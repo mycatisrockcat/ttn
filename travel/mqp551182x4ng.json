@@ -11,7 +11,12 @@
     "cover": "",
     "memo": ""
   },
-  "schedule": [],
+  "schedule": [
+    {
+      "date": "",
+      "items": []
+    }
+  ],
   "expenses": [],
   "checklist": {
     "packing": [],
