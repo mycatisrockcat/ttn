@@ -32,7 +32,13 @@
   },
   "records": {
     "2026-06-01": {
-      "posts": []
+      "posts": [
+        {
+          "text": "ㅇㅇ",
+          "photos": [],
+          "ts": 1782129607605
+        }
+      ]
     }
   },
   "exchangeRate": {
