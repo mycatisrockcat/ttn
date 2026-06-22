@@ -25,5 +25,13 @@
     "before": []
   },
   "photos": [],
-  "places": []
+  "places": [
+    {
+      "name": "",
+      "category": "",
+      "mapUrl": "",
+      "memo": "",
+      "visited": false
+    }
+  ]
 }
