@@ -16,9 +16,15 @@
       "date": "2026-06-01",
       "items": [
         {
-          "time": "",
+          "time": "21:27",
           "content": "상하이",
           "place": "하하",
+          "mapUrl": ""
+        },
+        {
+          "time": "",
+          "content": "",
+          "place": "",
           "mapUrl": ""
         }
       ]
