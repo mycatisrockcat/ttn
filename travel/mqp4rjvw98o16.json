@@ -13,7 +13,7 @@
   },
   "schedule": [
     {
-      "date": "",
+      "date": "2026-06-01",
       "items": []
     }
   ],
@@ -23,5 +23,10 @@
     "booking": [],
     "before": []
   },
-  "records": {}
+  "records": {
+    "2026-06-01": {
+      "photos": [],
+      "diary": ""
+    }
+  }
 }
