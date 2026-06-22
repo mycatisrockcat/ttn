@@ -12,7 +12,13 @@
     "memo": ""
   },
   "schedule": [],
-  "expenses": [],
+  "expenses": [
+    {
+      "category": "교통",
+      "item": "",
+      "amount": ""
+    }
+  ],
   "checklist": {
     "packing": [],
     "booking": [],
