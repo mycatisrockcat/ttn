@@ -31,7 +31,14 @@
     },
     {
       "date": "2026-06-02",
-      "items": []
+      "items": [
+        {
+          "time": "23:30",
+          "content": "",
+          "place": "",
+          "mapUrl": ""
+        }
+      ]
     }
   ],
   "expenses": [],
