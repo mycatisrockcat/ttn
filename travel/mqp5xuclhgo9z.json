@@ -1,0 +1,31 @@
+{
+  "id": "mqp5xuclhgo9z",
+  "overview": {
+    "name": "상하이 3박 4일",
+    "destination": "",
+    "start": "",
+    "end": "",
+    "companions": "",
+    "budget": "",
+    "status": "예정",
+    "cover": "",
+    "memo": ""
+  },
+  "schedule": [
+    {
+      "date": "",
+      "items": []
+    }
+  ],
+  "expenses": [],
+  "checklist": {
+    "packing": [],
+    "booking": [],
+    "before": []
+  },
+  "records": {},
+  "exchangeRate": {
+    "currency": "",
+    "rate": ""
+  }
+}
