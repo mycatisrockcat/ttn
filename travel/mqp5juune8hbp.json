@@ -13,7 +13,7 @@
   },
   "schedule": [
     {
-      "date": "",
+      "date": "2026-06-01",
       "items": [
         {
           "time": "20:49",
@@ -52,7 +52,11 @@
     "booking": [],
     "before": []
   },
-  "records": {},
+  "records": {
+    "2026-06-01": {
+      "posts": []
+    }
+  },
   "exchangeRate": {
     "currency": "엔",
     "rate": "9.5"
