@@ -20,7 +20,12 @@
     }
   ],
   "checklist": {
-    "packing": [],
+    "packing": [
+      {
+        "text": "",
+        "done": false
+      }
+    ],
     "booking": [],
     "before": []
   },
