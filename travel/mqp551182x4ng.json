@@ -31,7 +31,14 @@
     },
     {
       "date": "",
-      "items": []
+      "items": [
+        {
+          "time": "",
+          "content": "",
+          "place": "",
+          "mapUrl": ""
+        }
+      ]
     }
   ],
   "expenses": [],
